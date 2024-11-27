@@ -22,7 +22,7 @@ def fetch_first_image(query):
 st.title("Average Airline Fare by Airport")
 
 airport = st.selectbox("Select an Airport:", data["Airport Name"])
-year = st.selectbox("Select a year:", options=list(range(2014, 2025)), index=10)
+year = st.selectbox("Select a year:", options=list(range(2000, 2025)), index=10)
 
 airport_data = data[data["Airport Name"] == airport]
 
@@ -30,13 +30,13 @@ st.divider()
 
 if not airport_data.empty:
     fare = airport_data[str(year)].values[0]
-    st.markdown(f"### Average <span style='color:#03dbfc;'>{str(year)}</span> Fare: ${fare:.2f}", unsafe_allow_html=True)
+    st.markdown(f"###  <span style='color:#03dbfc;'>{str(airport)}</span> in  <span style='color:#03dbfc;'>{airport_data['City Name'].values[0]}, {airport_data['State Name'].values[0]}</span> had an average <span style='color:#03dbfc;'>{str(year)}</span> fare of: ${fare:.2f}", unsafe_allow_html=True)
     national_average = data[str(year)].mean()
     percent_difference = ((fare - national_average) / national_average) * 100
     if percent_difference > 0:
         st.write(f"#### That's {percent_difference:.2f}% <span style='color:red;'>higher</span> than the national average.", unsafe_allow_html=True)
     else:
-        st.write(f"#### That's {np.abs(percent_difference):.2f}% <span style='color:green;'>lower</span>  than the national average.", unsafe_allow_html=True)
+        st.write(f"#### That's {np.abs(percent_difference):.2f}% <span style='color:green;'>lower</span> than the national average.", unsafe_allow_html=True)
 
 else:
     st.write("No data available for the selected airport.")
@@ -56,12 +56,10 @@ historical_data = historical_data.merge(overall_mean, on='Year', suffixes=('', '
 
 st.line_chart(historical_data.set_index('Year')[['Average Fare (USD)', 'Average Fare (USD) National']])
 
-
-st.write("**Date Source:** *U.S. Department of Transportation, Bureau of Transportation Statistics* https://www.transtats.bts.gov/AverageFare/")
-
 image_url = fetch_first_image(airport)
 if image_url:
-    st.image(image_url, caption=f"Image of {airport}, sourced from {image_url}")
+    st.image(image_url, caption=f"Image of {airport}, sourced from {image_url} via DuckDuckGo. Image may be subject to copyright and/or may not be a correct image.")
 else:
-    st.write("No image available for this airport.")
+    st.write()
 
+st.write("**Date Source:** *U.S. Department of Transportation, Bureau of Transportation Statistics* https://www.transtats.bts.gov/AverageFare/")
