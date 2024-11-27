@@ -55,16 +55,7 @@ overall_mean = data.melt(id_vars=['Airport Code', 'Airport Name', 'City Name'],
 
 historical_data = historical_data.merge(overall_mean, on='Year', suffixes=('', ' National'))
 
-import matplotlib.pyplot as plt
-
-fig, ax = plt.subplots()
-historical_data.set_index('Year')[['Average Fare (USD)', 'Average Fare (USD) National']].plot(ax=ax)
-
-# Highlight the selected year
-selected_year_fare = historical_data[historical_data['Year'] == str(year)]['Average Fare (USD)'].values[0]
-ax.plot(str(year), selected_year_fare, 'ro')  # 'ro' means red dot
-
-st.pyplot(fig)
+st.line_chart(historical_data.set_index('Year')[['Average Fare (USD)', 'Average Fare (USD) National']])
 
 image_url = fetch_first_image(airport)
 if image_url:
