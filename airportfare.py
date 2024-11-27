@@ -25,6 +25,8 @@ airport = st.selectbox("Select an Airport:", data["Airport Name"])
 
 airport_data = data[data["Airport Name"] == airport]
 
+st.divider()
+
 if not airport_data.empty:
     fare = airport_data["Average Fare ($)"].values[0]
     st.write(f"### Average Fare: ${fare:.2f}")
@@ -38,7 +40,7 @@ if not airport_data.empty:
 else:
     st.write("No data available for the selected airport.")
 
-with st.expander("See explanation"):
+with st.expander("Historical average (adjusted for inflation)"):
     airport_data.columns = airport_data.columns.map(str)
     years = [col for col in airport_data.columns if col.isdigit()]
     historical_data = airport_data.melt(id_vars=['Airport Code', 'Airport Name', 'City Name'], 
