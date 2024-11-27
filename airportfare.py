@@ -31,7 +31,7 @@ st.divider()
 if not airport_data.empty:
     fare = airport_data[str(year)].values[0]
     st.write(f"### Average {str(year)} Fare: ${fare:.2f}")
-    national_average = data["Average Fare ($)"].mean()
+    national_average = data[str(year)].mean()
     percent_difference = ((fare - national_average) / national_average) * 100
     if percent_difference > 0:
         st.write(f"#### That's {percent_difference:.2f}% <span style='color:red;'>higher</span> than the national average.", unsafe_allow_html=True)
@@ -46,7 +46,7 @@ years = [col for col in airport_data.columns if col.isdigit()]
 historical_data = airport_data.melt(id_vars=['Airport Code', 'Airport Name', 'City Name'], 
                         value_vars=years, 
                         var_name='Year', 
-                        value_name='Average Fare')
+                        value_name='Average Fare (USD, adjusted for 2024 inflation)')
 st.line_chart(historical_data, x="Year", y="Average Fare (USD, adjusted for 2024 inflation)")
 
 
