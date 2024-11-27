@@ -30,7 +30,7 @@ st.divider()
 
 if not airport_data.empty:
     fare = airport_data[str(year)].values[0]
-    st.markdown(f"###  <span style='color:#03dbfc;'>{str(airport)}</span> in  <span style='color:#03dbfc;'>{airport_data['City Name'].values[0]}, {airport_data['State Name'].values[0]}</span> had an average <span style='color:#03dbfc;'>{str(year)}</span> fare of: ${fare:.2f}", unsafe_allow_html=True)
+    st.markdown(f"###  <span style='color:#03dbfc;'>{str(airport)}</span> in  <span style='color:#03dbfc;'>{airport_data['City Name'].values[0]}, {airport_data['State Name'].values[0]}</span> had an average fare in <span style='color:#03dbfc;'>{str(year)}</span> of: ${fare:.2f}", unsafe_allow_html=True)
     national_average = data[str(year)].mean()
     percent_difference = ((fare - national_average) / national_average) * 100
     if percent_difference > 0:
