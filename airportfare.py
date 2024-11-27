@@ -22,7 +22,7 @@ def fetch_first_image(query):
 st.title("Average Airline Fare by Airport")
 
 airport = st.selectbox("Select an Airport:", data["Airport Name"])
-year = st.selectbox("Select a year:", options=list(range(2014, 2025)))
+year = st.selectbox("Select a year:", options=list(range(2014, 2025)), index=10)
 
 airport_data = data[data["Airport Name"] == airport]
 
