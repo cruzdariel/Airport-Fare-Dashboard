@@ -1,5 +1,5 @@
-import os
-os.system('pip install pandas streamlit numpy duckduckgo-search requests')
+#import os
+#os.system('pip install pandas streamlit numpy duckduckgo-search requests')
 
 import pandas as pd
 import streamlit as st

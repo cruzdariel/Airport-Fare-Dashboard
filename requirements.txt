@@ -1,0 +1,6 @@
+streamlit
+pandas
+numpy
+requests
+duckduckgo_search
+os
