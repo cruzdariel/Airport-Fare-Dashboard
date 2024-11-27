@@ -1,8 +1,12 @@
+import os
+os.system('pip install pandas streamlit numpy duckduckgo-search requests')
+
 import pandas as pd
 import streamlit as st
 import numpy as np
-from duckduckgo_search import DDGS
 import requests
+from duckduckgo_search import DDGS
+
 
 data = pd.read_csv("https://raw.githubusercontent.com/cruzdariel/Airport-Fare-Dashboard/refs/heads/main/cleanairline.csv")
 
