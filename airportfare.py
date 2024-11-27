@@ -49,15 +49,12 @@ with st.expander("Historical average (adjusted for inflation)"):
                             value_name='Average Fare')
     st.line_chart(historical_data, x="Year", y="Average Fare")
 
-with st.expander("Airport Image"):
-    image_url = fetch_first_image(airport)
-    if image_url:
-        st.image(image_url, caption=f"Image of {airport}, sourced from {image_url}")
-    else:
-        st.write("No image available for this airport.")
-
 with st.expander("Data Source"):
     st.write("*U.S. Department of Transportation, Bureau of Transportation Statistics* https://www.transtats.bts.gov/AverageFare/")
 
-st.divider()
+image_url = fetch_first_image(airport)
+if image_url:
+    st.image(image_url, caption=f"Image of {airport}, sourced from {image_url}")
+else:
+    st.write("No image available for this airport.")
 
