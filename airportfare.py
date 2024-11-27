@@ -20,8 +20,7 @@ def fetch_first_image(query):
                 return None
         return None
 
-st.title("Average Airline Fare by Airport")
-st.subheader("This dashboard allows you to explore the average airline fare by airport in the United States.")
+st.title("Average Airline Fare by Domestic Airport")
 
 airport = st.selectbox("Select an Airport:", data["Airport Name"])
 year = st.selectbox("Select a year:", options=list(range(2000, 2025)), index=24)
