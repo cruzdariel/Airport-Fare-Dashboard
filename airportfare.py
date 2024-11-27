@@ -20,7 +20,7 @@ def fetch_first_image(query):
                 return None
         return None
 
-st.title("Average Airline Fare by Domestic Airport")
+st.title("Average Airfare by Domestic Airport")
 
 airport = st.selectbox("Select an Airport:", data["Airport Name"])
 year = st.selectbox("Select a year:", options=list(range(2000, 2025)), index=24)
