@@ -22,14 +22,15 @@ def fetch_first_image(query):
 st.title("Average Airline Fare by Airport")
 
 airport = st.selectbox("Select an Airport:", data["Airport Name"])
+year = st.slider("Select a year:", min_value=2014, max_value=2024, value=2024, step=1)
 
 airport_data = data[data["Airport Name"] == airport]
 
 st.divider()
 
 if not airport_data.empty:
-    fare = airport_data["Average Fare ($)"].values[0]
-    st.write(f"### Average Fare: ${fare:.2f}")
+    fare = airport_data[year].values[0]
+    st.write(f"### Average {year} Fare: ${fare:.2f}")
     national_average = data["Average Fare ($)"].mean()
     percent_difference = ((fare - national_average) / national_average) * 100
     if percent_difference > 0:
@@ -46,7 +47,7 @@ historical_data = airport_data.melt(id_vars=['Airport Code', 'Airport Name', 'Ci
                         value_vars=years, 
                         var_name='Year', 
                         value_name='Average Fare')
-st.line_chart(historical_data, x="Year", y="Average Fare")
+st.line_chart(historical_data, x="Year", y="Average Fare (USD, adjusted for 2024 inflation)")
 
 
 st.write("**Date Source:** *U.S. Department of Transportation, Bureau of Transportation Statistics* https://www.transtats.bts.gov/AverageFare/")
