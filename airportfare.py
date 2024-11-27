@@ -55,5 +55,7 @@ with st.expander("Airport Image"):
         st.image(image_url, caption=f"Image of {airport}, sourced from {image_url}")
     else:
         st.write("No image available for this airport.")
+        
+st.divider()
 
 st.write("*Data Source:* https://www.transtats.bts.gov/AverageFare/")
