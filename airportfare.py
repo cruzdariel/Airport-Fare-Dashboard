@@ -1,6 +1,3 @@
-#import os
-#os.system('pip install pandas streamlit numpy duckduckgo-search requests')
-
 import pandas as pd
 import streamlit as st
 import numpy as np
@@ -41,6 +38,16 @@ if not airport_data.empty:
 else:
     st.write("No data available for the selected airport.")
 
+with st.expander("See explanation"):
+    airport_data.columns = airport_data.columns.map(str)
+    years = [col for col in airport_data.columns if col.isdigit()]
+    historical_data = airport_data.melt(id_vars=['Airport Code', 'Airport Name', 'City Name'], 
+                            value_vars=years, 
+                            var_name='Year', 
+                            value_name='Average Fare')
+    st.line_chart(historical_data, x="Year", y="Average Fare")
+    
+    
 image_url = fetch_first_image(airport)
 
 if image_url:
