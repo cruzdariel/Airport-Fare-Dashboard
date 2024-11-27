@@ -4,7 +4,7 @@ import numpy as np
 from duckduckgo_search import DDGS
 import requests
 
-data = pd.read_csv("/Users/dariel/Downloads/Airport Fare Dashboard/cleanairline.csv")
+data = pd.read_csv("https://raw.githubusercontent.com/cruzdariel/Airport-Fare-Dashboard/refs/heads/main/cleanairline.csv")
 
 def fetch_first_image(query):
     with DDGS() as ddgs:
