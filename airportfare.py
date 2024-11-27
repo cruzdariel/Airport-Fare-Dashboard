@@ -49,5 +49,3 @@ else:
     st.write("No image available for this airport.")
 
 st.write("*Data Source:* https://www.transtats.bts.gov/AverageFare/")
-#if st.checkbox("Show Full Data"):
-  #  st.dataframe(data)
