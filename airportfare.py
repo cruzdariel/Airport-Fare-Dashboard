@@ -40,17 +40,16 @@ if not airport_data.empty:
 else:
     st.write("No data available for the selected airport.")
 
-with st.expander("Historical average (adjusted for inflation)"):
-    airport_data.columns = airport_data.columns.map(str)
-    years = [col for col in airport_data.columns if col.isdigit()]
-    historical_data = airport_data.melt(id_vars=['Airport Code', 'Airport Name', 'City Name'], 
-                            value_vars=years, 
-                            var_name='Year', 
-                            value_name='Average Fare')
-    st.line_chart(historical_data, x="Year", y="Average Fare")
+airport_data.columns = airport_data.columns.map(str)
+years = [col for col in airport_data.columns if col.isdigit()]
+historical_data = airport_data.melt(id_vars=['Airport Code', 'Airport Name', 'City Name'], 
+                        value_vars=years, 
+                        var_name='Year', 
+                        value_name='Average Fare')
+st.line_chart(historical_data, x="Year", y="Average Fare")
 
-with st.expander("Data Source"):
-    st.write("*U.S. Department of Transportation, Bureau of Transportation Statistics* https://www.transtats.bts.gov/AverageFare/")
+
+st.write("**Date Source:** *U.S. Department of Transportation, Bureau of Transportation Statistics* https://www.transtats.bts.gov/AverageFare/")
 
 image_url = fetch_first_image(airport)
 if image_url:
