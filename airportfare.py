@@ -46,8 +46,15 @@ years = [col for col in airport_data.columns if col.isdigit()]
 historical_data = airport_data.melt(id_vars=['Airport Code', 'Airport Name', 'City Name'], 
                         value_vars=years, 
                         var_name='Year', 
-                        value_name='Average Fare (USD, adjusted for 2024 inflation)')
-st.line_chart(historical_data, x="Year", y="Average Fare (USD, adjusted for 2024 inflation)")
+                        value_name='Average Fare (USD)')
+overall_mean = data.melt(id_vars=['Airport Code', 'Airport Name', 'City Name'], 
+                         value_vars=years, 
+                         var_name='Year', 
+                         value_name='Average Fare (USD)').groupby('Year')['Average Fare (USD)'].mean().reset_index()
+
+historical_data = historical_data.merge(overall_mean, on='Year', suffixes=('', ' Overall'))
+
+st.line_chart(historical_data.set_index('Year')[['Average Fare (USD)', 'Average Fare (USD) Overall']])
 
 
 st.write("**Date Source:** *U.S. Department of Transportation, Bureau of Transportation Statistics* https://www.transtats.bts.gov/AverageFare/")
