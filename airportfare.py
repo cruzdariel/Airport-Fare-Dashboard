@@ -29,8 +29,8 @@ airport_data = data[data["Airport Name"] == airport]
 st.divider()
 
 if not airport_data.empty:
-    fare = airport_data[year].values[0]
-    st.write(f"### Average {year} Fare: ${fare:.2f}")
+    fare = airport_data[str(year)].values[0]
+    st.write(f"### Average {str(year)} Fare: ${fare:.2f}")
     national_average = data["Average Fare ($)"].mean()
     percent_difference = ((fare - national_average) / national_average) * 100
     if percent_difference > 0:
