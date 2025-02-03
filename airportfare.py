@@ -5,6 +5,7 @@ import numpy as np
 data = pd.read_csv("https://raw.githubusercontent.com/cruzdariel/Airport-Fare-Dashboard/refs/heads/main/cleanairline.csv")
 
 st.title("Average Airfare by Domestic Airport")
+st.subheader("Dariel Cruz Rodriguez")
 
 airport = st.selectbox("Select an Airport:", data["Airport Name"])
 year = st.selectbox("Select a year:", options=list(range(2000, 2025)), index=24)
