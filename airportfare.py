@@ -1,24 +1,8 @@
 import pandas as pd
 import streamlit as st
 import numpy as np
-import requests
-from duckduckgo_search import DDGS
-
-# Wed Nov 27
 
 data = pd.read_csv("https://raw.githubusercontent.com/cruzdariel/Airport-Fare-Dashboard/refs/heads/main/cleanairline.csv")
-
-def fetch_first_image(query):
-    with DDGS() as ddgs:
-        results = ddgs.images(query, max_results=1)
-        if results:
-            url = results[0]['image']
-            response = requests.head(url)
-            if response.status_code == 200:
-                return url
-            else:
-                return None
-        return None
 
 st.title("Average Airfare by Domestic Airport")
 
@@ -56,12 +40,6 @@ overall_mean = data.melt(id_vars=['Airport Code', 'Airport Name', 'City Name'],
 historical_data = historical_data.merge(overall_mean, on='Year', suffixes=('', ' National'))
 
 st.line_chart(historical_data.set_index('Year')[['Average Fare (USD)', 'Average Fare (USD) National']])
-
-image_url = fetch_first_image(airport)
-if image_url:
-    st.image(image_url, caption=f"Image of {airport}, sourced from {image_url} via DuckDuckGo. Image may be subject to copyright and/or may not be a correct image.")
-else:
-    st.write()
 
 st.write("**Date Source:** *U.S. Department of Transportation, Bureau of Transportation Statistics* https://www.transtats.bts.gov/AverageFare/")
 
